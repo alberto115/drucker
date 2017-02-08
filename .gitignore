@@ -1,3 +1,7 @@
+# Temporary skip to prevent push data while creating architecure of composer
+src/*
+composer.lock
+
 # This file contains default .gitignore rules. To use it, copy it to .gitignore,
 # and it will cause files like your settings.php and user-uploaded files to be
 # excluded from Git version control. This is a common strategy to avoid
