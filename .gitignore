@@ -1,3 +1,7 @@
+# Temporary skip to prevent push data while creating architecure of composer
+src/*
+composer.lock
+
 # This file contains default .gitignore rules. To use it, copy it to .gitignore,
 # and it will cause files like your settings.php and user-uploaded files to be
 # excluded from Git version control. This is a common strategy to avoid
@@ -7,9 +11,11 @@
 # Because .gitignore can be specific to your site, this file has a different
 # name; updating Drupal core will not override your custom .gitignore file.
 
-# Ignore core when managing all of a project's dependencies with Composer
+# Ignore corei and contrib when managing all of a project's dependencies with Composer
 # including Drupal core.
-# core
+src/core
+src/modules/contrib/*
+src/themes/contrib/*
 
 # Core's dependencies are managed with Composer.
 vendor
@@ -30,10 +36,11 @@ sites/simpletest
 
 # Ignore configuration files that may contain sensitive information.
 # */settings*.php
+*/*.local.php
 
 # Ignore paths that contain user-generated content.
-# */files
-# */private
+*/files
+*/private
 
 # Ignore SimpleTest multi-site environment.
 # simpletest

@@ -1,40 +1,58 @@
-nginx:
-  image: nginx:latest
-  working_dir: /var/www/html
-  ports:
-    - "81:80"
-  links:
-    - db:localhost
-    - fpm
-  volumes_from:
-    - data
-  volumes:
-    - ./etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf 
+version: '2.1'
+services:
+  nginx:
+    image: nginx:latest
+    working_dir: /var/www/html
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - db:localhost
+      - fpm
+    volumes_from:
+      - data
+    volumes:
+      - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./etc/nginx/ssl:/etc/nginx/ssl ./etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
 
-fpm:
-  image: php:7-fpm
-  expose:
-    - 9000
-  links:
-    - db:vm.local
-  volumes_from:
-    - data
+  fpm:
+    build: catchdigital/php:7.1.2-fpm
+    expose:
+      - 9000
+    links:
+      - db:localhost
+    volumes_from:
+      - data
 
-data:
-  image: tianon/true
-  volumes:
-    - ./src:/var/www/html
+  data:
+    image: tianon/true
+    volumes:
+      - ./.:/var/www/html
 
-db:
-  image: percona:5.7
-  expose:
-    - 3306
-  volumes_from:
-    - data
-  volumes:
-     - /var/lib/mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: root
-    MYSQL_DATABASE: homestead
-    MYSQL_USER: root
+  db:
+    image: percona:5.7
+    ports:
+      - "3306:3306"
+    volumes_from:
+      - data
+    volumes:
+       - /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: root
 
+  node-sass:
+    image: abesiyo/node-sass:latest
+    command: bash -c "npm install && npm run build"
+    working_dir: /var/www/html/docroot/themes/custom/catch
+    volumes:
+      - ./.:/var/www/html
+
+  composer:
+    image: composer:latest
+    command: install --ignore-platform-reqs --no-scripts
+    working_dir: /var/www/html
+    volumes:
+      - ./.:/var/www/html
