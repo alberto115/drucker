@@ -1,7 +1,7 @@
 {
   "author": "Alberto Contreras",
   "name": "abesiyo/docker-drupal",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git@bitbucket.org:abecontreras/docker-nginx.git"
