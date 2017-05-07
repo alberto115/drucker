@@ -1,5 +1,5 @@
 {
-    "name": "abesiyo/docker-drupal",
+    "name": "abesiyo/drucker",
     "description": "Docker + drupal composer stack",
     "type": "project",
     "license": "GNU GPLv3",
