@@ -17,7 +17,7 @@ services:
       - ./etc/nginx/ssl:/etc/nginx/ssl ./etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
 
   fpm:
-    build: catchdigital/php:7.1.2-fpm
+    image: catchdigital/php:7.1.2-fpm
     expose:
       - 9000
     links:
