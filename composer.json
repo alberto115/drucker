@@ -4,6 +4,11 @@
     "type": "project",
     "license": "GNU GPLv3",
     "minimum-stability": "dev",
+    "config": {
+      "platorm": {
+        "php": "7.1"
+      }
+    },
     "authors": [
         {
             "name": "Alberto Contreras",
