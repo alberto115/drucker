@@ -43,16 +43,16 @@ services:
       MYSQL_DATABASE: homestead
       MYSQL_USER: root
 
-  node-sass:
-    image: abesiyo/node-sass:latest
-    command: bash -c "npm install && npm run build"
-    working_dir: /var/www/html/docroot/themes/custom/catch
-    volumes:
-      - ./.:/var/www/html
+#  node-sass:
+#    image: abesiyo/node-sass:latest
+#    command: bash -c "npm install && npm run build"
+#    working_dir: /var/www/html/docroot/themes/custom/catch
+#    volumes:
+#      - ./.:/var/www/html
 
-  composer:
-    image: composer:latest
-    command: install --ignore-platform-reqs --no-scripts
-    working_dir: /var/www/html
-    volumes:
-      - ./.:/var/www/html
+#  composer:
+#    image: composer:latest
+#    command: install --ignore-platform-reqs --no-scripts
+#    working_dir: /var/www/html
+#    volumes:
+#      - ./.:/var/www/html
