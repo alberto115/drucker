@@ -32,6 +32,7 @@ services:
 
   db:
     image: percona:5.7
+    env_file: .env
     ports:
       - "3306:3306"
     volumes_from:
@@ -39,9 +40,9 @@ services:
     volumes:
        - /var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: homestead
-      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
 
 #  node-sass:
 #    image: abesiyo/node-sass:latest
