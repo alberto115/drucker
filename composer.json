@@ -35,11 +35,11 @@
     "prefer-stable": true,
     "scripts": {
       "post-root-package-install": [
-        "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+        "cd etc/nginx/ssl && openssl req -x509 -newkey rsa:4086 -subj \"/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=vm.localhost\" -keyout \"key.pem\" -out \"cert.pem\" -days 3650 -nodes -sha256"
       ],
       "post-create-project-cmd": [
-        "php -r \"file_exists('src/sites/default/settings.local.php') || copy('example.settings.local.php', 'src/sites/default/settings.local.php');\"",
-        "cd etc/nginx/ssl && openssl req -x509 -newkey rsa:4086 -subj \"/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=vm.localhost\" -keyout \"key.pem\" -out \"cert.pem\" -days 3650 -nodes -sha256"
+        "php -r \"file_exists('src/sites/default/settings.local.php') || copy('example.settings.local.php', 'src/sites/default/settings.local.php');\""        
       ],
 			"post-install-cmd": [
       ],
