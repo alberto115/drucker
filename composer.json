@@ -36,9 +36,9 @@
     "scripts": {
       "post-root-package-install": [
         "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-        "php -r \"file_exists('src/sites/default/settings.local.php') || copy('example.settings.local.php', 'src/sites/default/settings.local.php');\""
       ],
       "post-create-project-cmd": [
+        "php -r \"file_exists('src/sites/default/settings.local.php') || copy('example.settings.local.php', 'src/sites/default/settings.local.php');\""
       ],
 			"post-install-cmd": [
       ],
