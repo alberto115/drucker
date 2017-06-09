@@ -2,12 +2,12 @@ version: '2.1'
 services:
   nginx:
     image: nginx:latest
+    env_file: .env
     working_dir: /var/www/html
     ports:
-      - "80:80"
-      - "443:443"
+      - "${APP_PORT}:443"
     links:
-      - db:localhost
+      - db:${APP_URL}
       - fpm
     volumes_from:
       - data
@@ -21,7 +21,7 @@ services:
     expose:
       - 9000
     links:
-      - db:localhost
+      - db:${APP_URL}
     volumes_from:
       - data
 
