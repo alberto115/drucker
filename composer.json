@@ -27,22 +27,22 @@
         "cweagans/composer-patches": "~1.0",
         "drupal/core": "~8.2",
         "drush/drush": "~8.0",
-        "drupal/console": "~1.0"
+        "drupal/console": "~1.0",
+        "vlucas/phpdotenv": "^2.4"
     },
-    "require-dev": {},
+    "require-dev": {
+    },
     "prefer-stable": true,
     "scripts": {
       "post-root-package-install": [
-        "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+        "php -r \"file_exists('src/sites/default/settings.local.php') || copy('example.settings.local.php', 'src/sites/default/settings.local.php');\""
       ],
       "post-create-project-cmd": [
-        "../vnedor/bin/drush status"
       ],
 			"post-install-cmd": [
-        "../vendor/bin/drush cr"
       ],
       "post-update-cmd": [
-        "../vendor/bin/drush cr"
 			]
     },
     "extra": {
