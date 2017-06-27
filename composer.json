@@ -25,7 +25,7 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "~8.2",
+        "drupal/core": "~8",
         "drush/drush": "~8.0",
         "drupal/console": "~1.0",
         "vlucas/phpdotenv": "^2.4"
@@ -39,7 +39,8 @@
         "cd etc/nginx/ssl && openssl req -x509 -newkey rsa:4086 -subj \"/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=vm.localhost\" -keyout \"key.pem\" -out \"cert.pem\" -days 3650 -nodes -sha256"
       ],
       "post-create-project-cmd": [
-        "php -r \"file_exists('src/sites/default/settings.local.php') || copy('example.settings.local.php', 'src/sites/default/settings.local.php');\""        
+        "php -r \"file_exists('src/sites/default/settings.local.php') || copy('example.settings.local.php', 'src/sites/default/settings.local.php');\"",
+        "./vendor/bin/drush eval \"echo Drupal\Component\Utility\Crypt::randomBytesBase64(55)\" > salt.txt"
       ],
 			"post-install-cmd": [
       ],
