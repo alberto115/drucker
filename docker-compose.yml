@@ -30,7 +30,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-       - ${APP_PREFIX}_db:/var/lib/mysql
+       - drucker-db:/var/lib/mysql
        - ./etc/mysql/conf.d:/etc/mysql/conf.d:cached
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -45,7 +45,7 @@ services:
 #      - ./.:/var/www/html
 
 volumes:
-  ${APP_PREFIX}_db:
+  drucker-db:
 
 #  composer:
 #    image: composer:latest
