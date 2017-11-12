@@ -37,7 +37,8 @@
       "post-root-package-install": [
       ],
       "post-create-project-cmd": [
-        "./vendor/bin/drush eval \"echo Drupal\\Component\\Utility\\Crypt::randomBytesBase64(55)\" > salt.txt"
+        "./vendor/bin/drush eval \"echo Drupal\\Component\\Utility\\Crypt::randomBytesBase64(55)\" > salt.txt",
+        "php -r \"file_exists('docroot/sites/default/settings.php') || copy('docroot/sites/default/default.settings.php', 'docroot/sites/default/settings.php');\""
       ],
 			"post-install-cmd": [
         "echo \"post-install-cmd\"",
