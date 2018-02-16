@@ -2,7 +2,7 @@
     "name": "abesiyo/drucker",
     "description": "Docker + drupal composer stack",
     "type": "project",
-    "license": "GNU GPLv3",
+    "license": "MIT",
     "minimum-stability": "dev",
     "config": {
       "platorm": {
