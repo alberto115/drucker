@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "config": {
       "platorm": {
-        "php": "7.1.10"
+        "php": "7.2.8"
       }
     },
     "authors": [
@@ -25,7 +25,7 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "^8.4",
+        "drupal/core": "^8.6",
         "drush/drush": "~9",
         "drupal/console": "~1.0",
         "vlucas/phpdotenv": "^2.4"
@@ -37,16 +37,18 @@
       "post-root-package-install": [
       ],
       "post-create-project-cmd": [
+        "echo \"post-create-project-cmd\"",
         "./vendor/bin/drush eval \"echo Drupal\\Component\\Utility\\Crypt::randomBytesBase64(55)\" > salt.txt",
-        "php -r \"file_exists('docroot/sites/default/settings.php') || copy('docroot/sites/default/default.settings.php', 'docroot/sites/default/settings.php');\""
+        "php -r \"file_exists('docroot/sites/default/settings.php') || copy('docroot/sites/default/default.settings.php', 'docroot/sites/default/settings.php');\"",
+        "cd etc/nginx/ssl && openssl req -x509 -newkey rsa:4086 -subj \"/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=vm.localhost\" -keyout \"key.pem\" -out \"cert.pem\" -days 3650 -nodes -sha256"
       ],
 			"post-install-cmd": [
         "echo \"post-install-cmd\"",
         "php -r \"file_exists('docroot/sites/default/settings.local.php') || copy('example.settings.local.php', 'docroot/sites/default/settings.local.php');\""
       ],
       "post-update-cmd": [
+        "echo \"post-update-cmd\"",
         "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-        "cd etc/nginx/ssl && openssl req -x509 -newkey rsa:4086 -subj \"/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=vm.localhost\" -keyout \"key.pem\" -out \"cert.pem\" -days 3650 -nodes -sha256",
         "php -r \"file_exists('docroot/sites/default/settings.local.php') || copy('example.settings.local.php', 'docroot/sites/default/settings.local.php');\""
 			]
     },
