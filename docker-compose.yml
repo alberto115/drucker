@@ -1,32 +1,34 @@
 version: '3'
+
 services:
   nginx:
     image: nginx:latest
-    working_dir: /var/www/html
+    working_dir: /var/www/html/docroot
     ports:
-      - "${APP_PORT}:443"
+      - "80:80"
+      - "443:443"
     links:
       - db:${APP_URL}
       - fpm
     volumes:
-      - ./etc/nginx/conf.d:/etc/nginx/conf.d:cached
-      - ./etc/nginx/ssl:/etc/nginx/ssl:cached
-      - ./.:/var/www/html:cached
+      - ./docker/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:cached
+      - ./docker/etc/nginx/ssl:/etc/nginx/ssl:cached
+      - ./:/var/www/html:cached
 
   fpm:
-    image: catchdigital/php:7.1.10-fpm
-    user: www-data:www-data
+    image: catchdigital/php:7.2.8-fpm
+    working_dir: /var/www/html/docroot
+    env_file: .env
     expose:
       - 9000
     links:
       - db:${APP_URL}
     volumes:
-      - ./etc/php/config.ini:/usr/local/etc/php/conf.d/x-config.ini:cached
+      - ./docker/etc/php/config.ini:/usr/local/etc/php/conf.d/x-config.ini:cached
       - ./.:/var/www/html:cached
 
   db:
     image: percona:5.7
-    env_file: .env
     ports:
       - "3306:3306"
     volumes:
@@ -37,19 +39,23 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
 
-#  node-sass:
-#    image: abesiyo/node-sass:latest
-#    command: bash -c "npm install && npm run build"
-#    working_dir: /var/www/html/docroot/${PATH_THEME}
-#    volumes:
-#      - ./.:/var/www/html
+  # memcached:
+  #   image: memcached:1.5.2-alpine
+
+  # node-sass:
+  #   image: catchdigital/awscli:latest
+  #   user: '1000'
+  #   command: bash -c "npm install && npm run build"
+  #   working_dir: /var/www/html/docroot/themes/custom/iop_theme
+  #   volumes:
+  #     - ./.:/var/www/html
+
+  # composer:
+  #   image: composer:latest
+  #   command: install --no-dev --no-interaction --optimize-autoloader
+  #   working_dir: /var/www/html
+  #   volumes:
+  #     - ./.:/var/www/html
 
 volumes:
   drucker-db:
-
-#  composer:
-#    image: composer:latest
-#    command: install --ignore-platform-reqs --no-scripts
-#    working_dir: /var/www/html
-#    volumes:
-#      - ./.:/var/www/html
