@@ -9,9 +9,9 @@
 
 # Ignore corei and contrib when managing all of a project's dependencies with Composer
 # including Drupal core.
-src/core
-src/modules/contrib/*
-src/themes/contrib/*
+docroot/core
+docroot/modules/contrib/*
+docroot/themes/contrib/*
 
 # Core's dependencies are managed with Composer.
 vendor
@@ -48,12 +48,5 @@ core/phpunit.xml
 # Ignore .env files
 .env
 
-# Ignore local certs
-etc/nginx/ssl/*.pem
-etc/nginx/ssl/*.crt
-etc/nginx/ssl/*.key
-etc/nginx/ssl/*.p12
-
 # Ignore PHPStorm files
 .idea
-
